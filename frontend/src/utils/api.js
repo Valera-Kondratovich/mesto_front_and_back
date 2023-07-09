@@ -1,4 +1,4 @@
-const urlApi = 'https://mesto.nomoreparties.co/v1/cohort-62'; //адрес сервера где храняться карточки
+const urlApi = 'https://api.mesto.kondratovich.nomoredomains.work'; //адрес сервера где храняться карточки
 const tokenApi = '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2';                // токен пользователя
  class Api {
   constructor(config) {

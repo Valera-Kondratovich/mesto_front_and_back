@@ -1,6 +1,6 @@
 import React from "react";
 
-const BASE_URL = 'https://auth.nomoreparties.co'
+const BASE_URL = 'https://api.mesto.kondratovich.nomoredomains.work'
 
 export const register =(password, email )=>{
   return fetch(`${BASE_URL}/signup`,{
