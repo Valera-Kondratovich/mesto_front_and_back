@@ -40,7 +40,7 @@ app.use(cookieSession({
 }));
 app.use(cors({
   credentials: true,
-  origin: 'https://mesto.kondratovich.nomoreparties.sbs',
+  origin: ['https://mesto.kondratovich.nomoreparties.sbs', 'http://mesto.kondratovich.nomoreparties.sbs'],
 }));
 app.use(limiter);
 app.use(helmet());
