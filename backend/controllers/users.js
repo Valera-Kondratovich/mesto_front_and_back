@@ -17,9 +17,10 @@ const login = (req, res, next) => {
         if (matched) {
           const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'MDKL');
           res.cookie('jwt', token, {
+            secret: 'yourSecret',
             maxAge: 360000,
             httpOnly: false,
-            sameSite: 'none',
+            sameSite: false,
           });
           res.status(200).send(user);
         } else {
