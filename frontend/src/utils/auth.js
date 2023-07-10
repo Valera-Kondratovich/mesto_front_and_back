@@ -1,9 +1,12 @@
 import React from "react";
 
 const BASE_URL = 'https://api.mesto.kondratovich.nomoredomains.work'
+// https://api.mesto.kondratovich.nomoredomains.work
+// http://localhost:3001
 
 export const register =(password, email )=>{
   return fetch(`${BASE_URL}/signup`,{
+    credentials: 'include',
     method:'POST',
     headers: {
       'Accept': 'application/json',
@@ -16,6 +19,7 @@ export const register =(password, email )=>{
 
 export const login =(password, email )=>{
   return fetch(`${BASE_URL}/signin`,{
+    credentials: 'include',
     method:'POST',
     headers: {
       'Accept': 'application/json',
@@ -23,18 +27,14 @@ export const login =(password, email )=>{
     },
     body: JSON.stringify({password, email })
   })
-
 }
 
-export const getContent =(jwt)=>{
-  return fetch(`${BASE_URL}/users/me`,{
+export const logout =()=>{
+  return fetch(`${BASE_URL}/signout`,{
+    credentials: 'include',
     method:'GET',
     headers: {
-
-      "Content-Type": "application/json",
-    "Authorization" : `Bearer ${jwt}`
-    },
+      "Content-Type": "application/json"
+    }
   })
-
-
 }

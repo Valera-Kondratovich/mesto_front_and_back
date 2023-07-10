@@ -11,7 +11,6 @@ import ImagePopup from "./ImagePopup";
 import CardImageDeletePopup from "./CardImageDeletePopup";
 import InfoTooltip from "./InfoTooltip";
 import api from "../utils/api";
-import * as auth from "../utils/auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
@@ -33,41 +32,39 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    tokenCheck();
+    tokenCheck()
   }, []);
 
   useEffect(() => {
+    handleCardsData()
+  }, []);
+
+  function tokenCheck() {
     api
       .getUserData()
-      .then((dataUser) => {
-        setCurrentUser(dataUser);
+      .then((res) => {
+        setLoggedIn(true);
+        setEmail(res.email);
+        setCurrentUser(res);
+       navigate("/");
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
+  }
+  function handleUserData(user) {
+    setCurrentUser(user)
+  }
+  function handleCardsData() {
     api
       .getAllCardsData()
       .then((data) => {
         setCards(data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
 
-  function tokenCheck() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .getContent(jwt)
-        .then((res) =>
-          res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
-        )
-        .then((res) => {
-          setLoggedIn(true);
-          setEmail(res.data.email);
-          navigate("/");
-        });
-    }
+  function handleLogOut() {
+    setCurrentUser({});
+    setLoggedIn(false)
   }
 
   function handleInfoPopup(err) {
@@ -108,7 +105,7 @@ function App() {
   // функция добавления удаления лайков
   function handleCardLike(card) {
     //проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -173,7 +170,7 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header email={email} />
+        <Header email={email} handleLogOut={handleLogOut}/>
         <Routes>
           <Route
             path="/"
@@ -194,7 +191,10 @@ function App() {
           <Route path="*" element={<Login handleLogin={handleLogin} />} />
           <Route
             path="/sign-in"
-            element={<Login handleLogin={handleLogin} />}
+            element={<Login
+              handleLogin={handleLogin}
+              handleUserData={handleUserData}
+              handleCardsData={handleCardsData}/>}
           />
           <Route
             path="/sign-up"

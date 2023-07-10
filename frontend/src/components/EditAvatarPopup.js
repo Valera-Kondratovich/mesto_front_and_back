@@ -20,7 +20,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       name="avatar"
       title="Обновить аватар"
-      // titleButtonSumbit="Сохранить"
       onClose={onClose}
       onSumbit={handleSubmit}
     >

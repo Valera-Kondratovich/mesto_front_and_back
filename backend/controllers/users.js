@@ -1,3 +1,4 @@
+const { NODE_ENV, JWT_SECRET, SALT } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -14,7 +15,7 @@ const login = (req, res, next) => {
     .then((user) => {
       bcrypt.compare(String(password), user.password).then((matched) => {
         if (matched) {
-          const token = jwt.sign({ _id: user._id }, 'MDKL');
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'MDKL');
           res.cookie('jwt', token, {
             maxAge: 360000,
             httpOnly: true,
@@ -39,7 +40,7 @@ const getUsers = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   bcrypt
-    .hash(String(req.body.password), 10)
+    .hash(String(req.body.password), NODE_ENV === 'production' ? SALT : 10)
     .then((hash) => {
       User.create({
         ...req.body,
@@ -108,6 +109,10 @@ const updateAvatarUser = (req, res, next) => {
     });
 };
 
+const logout = (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+};
+
 module.exports = {
   login,
   getUserById,
@@ -116,4 +121,5 @@ module.exports = {
   updateUser,
   updateAvatarUser,
   getUserAboutMe,
+  logout,
 };

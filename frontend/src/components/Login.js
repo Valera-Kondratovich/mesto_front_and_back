@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import * as auth from "../utils/auth"
 
-function Login({handleLogin}) {
+function Login({handleLogin, handleUserData, handleCardsData}) {
   const [formValue, setFormValue] = useState({
     email: '',
     password: '',
@@ -25,10 +25,11 @@ const onLogin=(e)=>{
   auth.login(password, email)
   .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   .then((res)=> {
-    if(res.token){
-      localStorage.setItem('jwt', res.token);
+      handleUserData(res);
       handleLogin(email);
-      navigate("/")}
+      handleCardsData();
+      navigate("/")
+    // }
     })
   .catch(err=> console.log(err))
 

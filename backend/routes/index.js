@@ -7,6 +7,7 @@ const NotFoundError = require('../errors/notFoundError');
 const {
   login,
   createUser,
+  logout,
 } = require('../controllers/users');
 
 router.post('/signin', celebrate({
@@ -26,7 +27,7 @@ router.post('/signup', celebrate({
 }), createUser);
 
 router.use(auth);
-
+router.get('/signout', logout);
 router.use('/users', userRoutes);
 router.use('/cards', cardRoutes);
 router.use('/*', (req, res, next) => {

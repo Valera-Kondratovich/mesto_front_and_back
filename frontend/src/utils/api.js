@@ -1,5 +1,5 @@
-const urlApi = 'https://api.mesto.kondratovich.nomoredomains.work'; //адрес сервера где храняться карточки
-const tokenApi = '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2';                // токен пользователя
+const urlApi = 'https://api.mesto.kondratovich.nomoredomains.work'; //http://localhost:3001
+// https://api.mesto.kondratovich.nomoredomains.work
  class Api {
   constructor(config) {
     this._url = config.url;
@@ -12,6 +12,7 @@ const tokenApi = '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2';                // то�
 
   getAllCardsData() {
     return this._request(`${this._url}/cards`, {
+      credentials: 'include',
       method: 'GET',
       headers: this._headers
     })
@@ -19,6 +20,7 @@ const tokenApi = '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2';                // то�
 
   getUserData() {
     return this._request(`${this._url}/users/me`, {
+      credentials: 'include',
       method: 'GET',
       headers: this._headers
     })
@@ -26,6 +28,7 @@ const tokenApi = '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2';                // то�
 
   patchUserData(data) {
     return this._request(`${this._url}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this._headers,
@@ -34,6 +37,7 @@ const tokenApi = '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2';                // то�
 
   postCardData(data) {
     return this._request(`${this._url}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
@@ -51,6 +55,7 @@ else {
 
   putLike(idImage) {
     return this._request(`${this._url}/cards/${idImage}/likes`, {
+      credentials: 'include',
       method: 'PUT',
       headers: this._headers,
     })
@@ -58,6 +63,7 @@ else {
 
   delLike(idImage) {
     return this._request(`${this._url}/cards/${idImage}/likes`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     })
@@ -65,6 +71,7 @@ else {
 
   delCard(idImage) {
     return this._request(`${this._url}/cards/${idImage}`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     })
@@ -72,6 +79,7 @@ else {
 
   patchUserAvatar(urlAvatar) {
     return this._request(`${this._url}/users/me/avatar`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(urlAvatar)
@@ -93,7 +101,6 @@ const api = new Api({
   url: urlApi,
   headers: {
     'Content-Type': 'application/json',
-    authorization: tokenApi,
   }
 });
 
