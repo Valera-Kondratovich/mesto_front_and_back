@@ -39,7 +39,7 @@ app.use(cors({
 app.use(cookieSession({
   secret: 'yourSecret',
   secure: false,
-  httpOnly: true,
+  httpOnly: false,
   sameSite: false,
 }));
 app.use(limiter);
