@@ -31,17 +31,18 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(requestLogger);
+app.use(cors({
+  credentials: true,
+  origin: ['https://mesto.kondratovich.nomoreparties.sbs', 'http://mesto.kondratovich.nomoreparties.sbs'],
+}));
 //исправить потом на сервере
 app.use(cookieSession({
   secret: 'yourSecret',
   secure: false,
   httpOnly: false,
   sameSite: false,
-}));
-app.use(cors({
-  credentials: true,
-  origin: ['https://mesto.kondratovich.nomoreparties.sbs', 'http://mesto.kondratovich.nomoreparties.sbs'],
-}));
+}),
+);
 app.use(limiter);
 app.use(helmet());
 app.use(express.json());
