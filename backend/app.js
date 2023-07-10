@@ -36,12 +36,12 @@ app.use(cors({
   origin: 'https://mesto.kondratovich.nomoreparties.sbs',
 }));
 //исправить потом на сервере
-// app.use(cookieSession({
-//   secret: 'yourSecret',
-//   secure: false,
-//   httpOnly: false,
-//   sameSite: false,
-// }));
+app.use(cookieSession({
+  secret: 'yourSecret',
+  secure: false,
+  httpOnly: true,
+  sameSite: false,
+}));
 app.use(limiter);
 app.use(helmet());
 app.use(express.json());
