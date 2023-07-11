@@ -18,10 +18,12 @@ const login = (req, res, next) => {
           const token = jwt.sign({ _id: user._id }, 'MDKL'); //NODE_ENV === 'production' ? JWT_SECRET :
           res.cookie('jwt', token, {
             maxAge: 360000,
-            secure: false,
+            secure: true,
             httpOnly: false,
-            sameSite: 'Lax',
+            sameSite: 'none',
           });
+          console.log(token);
+          console.log(res.cookie);
           res.status(200).send(user);
         } else {
           next(new UnauthorizedError('Не правильный логин или пароль'));
