@@ -15,7 +15,7 @@ const login = (req, res, next) => {
     .then((user) => {
       bcrypt.compare(String(password), user.password).then((matched) => {
         if (matched) {
-          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'MDKL');
+          const token = jwt.sign({ _id: user._id }, 'MDKL'); //NODE_ENV === 'production' ? JWT_SECRET :
           res.cookie('jwt', token, {
             maxAge: 360000,
             httpOnly: true,
