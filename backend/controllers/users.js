@@ -18,6 +18,7 @@ const login = (req, res, next) => {
           const token = jwt.sign({ _id: user._id }, 'MDKL'); //NODE_ENV === 'production' ? JWT_SECRET :
           res.cookie('jwt', token, {
             maxAge: 360000,
+            secure: true,
             httpOnly: true,
             sameSite: 'none',
           });
