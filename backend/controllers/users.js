@@ -19,11 +19,9 @@ const login = (req, res, next) => {
           res.cookie('jwt', token, {
             maxAge: 360000,
             secure: true,
-            httpOnly: false,
+            httpOnly: true,
             sameSite: 'none',
           });
-          console.log(token);
-          console.log(res.cookie);
           res.status(200).send(user);
         } else {
           next(new UnauthorizedError('Не правильный логин или пароль'));

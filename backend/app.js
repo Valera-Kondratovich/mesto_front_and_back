@@ -39,9 +39,9 @@ app.use(cors({
 //исправить потом на сервере
 app.use(cookieSession({
   secret: 'yourSecret',
-  secure: false,
-  httpOnly: false,
-  sameSite: 'Lax',
+  secure: true,
+  httpOnly: true,
+  sameSite: 'none',
 }),
 );
 app.use(limiter);
