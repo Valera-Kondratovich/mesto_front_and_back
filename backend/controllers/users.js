@@ -20,7 +20,7 @@ const login = (req, res, next) => {
             maxAge: 360000,
             secure: false,
             httpOnly: false,
-            sameSite: false,
+            sameSite: 'none',
           });
           res.status(200).send(user);
         } else {
