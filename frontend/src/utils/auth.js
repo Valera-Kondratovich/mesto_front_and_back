@@ -1,8 +1,4 @@
-import React from "react";
-
 const BASE_URL = 'https://api.mesto.kondratovich.nomoredomains.work'
-// https://api.mesto.kondratovich.nomoredomains.work
-// http://localhost:3001
 
 export const register =(password, email )=>{
   return fetch(`${BASE_URL}/signup`,{

@@ -15,7 +15,7 @@ const login = (req, res, next) => {
     .then((user) => {
       bcrypt.compare(String(password), user.password).then((matched) => {
         if (matched) {
-          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'MDKL'); //NODE_ENV === 'production' ? JWT_SECRET :
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'MDKL');
           res.cookie('jwt', token, {
             maxAge: 360000,
             secure: true,
@@ -41,7 +41,7 @@ const getUsers = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   bcrypt
-    .hash(String(req.body.password), NODE_ENV === 'production' ? SALT : 10)  //NODE_ENV === 'production' ? SALT :
+    .hash(String(req.body.password), NODE_ENV === 'production' ? SALT : 10)
     .then((hash) => {
       User.create({
         ...req.body,

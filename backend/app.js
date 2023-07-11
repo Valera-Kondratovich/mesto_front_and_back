@@ -34,15 +34,13 @@ app.use(requestLogger);
 app.use(cors({
   credentials: true,
   origin: 'https://mesto.kondratovich.nomoreparties.sbs',
-  //http://localhost:3000
 }));
 app.use(cookieSession({
   secret: 'yourSecret',
   secure: true,
   httpOnly: true,
   sameSite: 'none',
-}),
-);
+}));
 app.use(limiter);
 app.use(helmet());
 app.use(express.json());
