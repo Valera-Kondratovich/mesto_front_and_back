@@ -1,4 +1,5 @@
-const urlApi = 'https://api.mesto.kondratovich.nomoredomains.work'; //http://localhost:3001
+const urlApi = 'https://api.mesto.kondratovich.nomoredomains.work';
+//http://localhost:3001
 // https://api.mesto.kondratovich.nomoredomains.work
  class Api {
   constructor(config) {
