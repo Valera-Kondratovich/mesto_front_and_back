@@ -40,7 +40,7 @@ app.use(cookieSession({
   secret: 'yourSecret',
   secure: false,
   httpOnly: true,
-  sameSite: false,
+  sameSite: 'none',
 }),
 );
 app.use(limiter);
