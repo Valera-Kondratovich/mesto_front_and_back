@@ -38,8 +38,8 @@ app.use(cors({
 //исправить потом на сервере
 app.use(cookieSession({
   secret: 'yourSecret',
-  secure: false,
-  httpOnly: false,
+  secure: true,
+  httpOnly: true,
   sameSite: false,
 }),
 );
