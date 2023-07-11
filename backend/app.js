@@ -19,7 +19,7 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-const { PORT = 3005 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 app.listen(PORT, () => {
@@ -40,7 +40,7 @@ app.use(cors({
 app.use(cookieSession({
   secret: 'yourSecret',
   secure: false,
-  httpOnly: true,
+  httpOnly: false,
   sameSite: 'Lax',
 }),
 );
