@@ -40,7 +40,7 @@ app.use(cors({
 app.use(cookieSession({
   secret: 'yourSecret',
   secure: true,
-  httpOnly: true,
+  httpOnly: false,
   sameSite: 'none',
 }),
 );
