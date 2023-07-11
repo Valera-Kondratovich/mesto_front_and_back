@@ -38,7 +38,7 @@ app.use(cors({
 //исправить потом на сервере
 app.use(cookieSession({
   secret: 'yourSecret',
-  secure: false,
+  secure: true,
   httpOnly: true,
   sameSite: 'none',
 }),
