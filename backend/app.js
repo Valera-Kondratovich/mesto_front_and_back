@@ -19,7 +19,7 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3003 } = process.env;
 
 const app = express();
 app.listen(PORT, () => {
@@ -36,7 +36,6 @@ app.use(cors({
   origin: 'https://mesto.kondratovich.nomoreparties.sbs',
   //http://localhost:3000
 }));
-//исправить потом на сервере
 app.use(cookieSession({
   secret: 'yourSecret',
   secure: true,

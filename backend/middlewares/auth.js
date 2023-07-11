@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
   }
   let payload;
   try {
-    payload = jwt.verify(token, 'MDKL'); //NODE_ENV === 'production' ? JWT_SECRET : 'MDKL'
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'MDKL'); //NODE_ENV === 'production' ? JWT_SECRET : 'MDKL'
   } catch (err) {
     if (err.name === 'JsonWebTokenError') {
       next(new UnauthorizedError('Необходима авторизация'));
