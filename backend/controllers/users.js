@@ -19,7 +19,7 @@ const login = (req, res, next) => {
           res.cookie('jwt', token, {
             maxAge: 360000,
             secure: true,
-            httpOnly: false,
+            httpOnly: true,
             sameSite: 'none',
           });
           res.status(200).send(user);
@@ -111,7 +111,11 @@ const updateAvatarUser = (req, res, next) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
+  res.clearCookie('jwt', {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'none',
+  }).send({ message: 'Выход' });
 };
 
 module.exports = {
